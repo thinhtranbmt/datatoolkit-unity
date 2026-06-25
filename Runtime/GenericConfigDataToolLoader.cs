@@ -87,7 +87,10 @@ namespace DataToolKit
         private bool TryParse(string json, out T data)
         {
             data = default;
-            if (string.IsNullOrEmpty(json)) return false;
+            if (string.IsNullOrEmpty(json))
+            {
+                return false;
+            }
 
             data = _parser(json);
             return IsValidData(data);
@@ -96,7 +99,10 @@ namespace DataToolKit
         private bool TryLoadFromLocal(out T data)
         {
             data = default;
-            if (!File.Exists(CacheFilePath)) return false;
+            if (!File.Exists(CacheFilePath))
+            {
+                return false;
+            }
 
             string json = File.ReadAllText(CacheFilePath);
             return TryParse(json, out data);
@@ -128,8 +134,14 @@ namespace DataToolKit
 
         private static bool IsValidData(T data)
         {
-            if (data == null) return false;
-            if (data.Equals(default(T))) return false;
+            if (data == null)
+            {
+                return false;
+            }
+            if (data.Equals(default(T)))
+            {
+                return false;
+            }
 
             return data switch
             {

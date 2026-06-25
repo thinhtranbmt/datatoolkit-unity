@@ -41,8 +41,14 @@ namespace DataToolKit.EditorTests
         private static async UniTaskVoid RunInternal()
         {
             bool ok = await RunAsync();
-            if (ok) Debug.Log(LastReport);
-            else Debug.LogError(LastReport);
+            if (ok)
+            {
+                Debug.Log(LastReport);
+            }
+            else
+            {
+                Debug.LogError(LastReport);
+            }
         }
 
         public static async UniTask<bool> RunAsync()
@@ -144,14 +150,23 @@ namespace DataToolKit.EditorTests
                 List<string> tables = ParseTables(url);
                 bool isWriteKey = url.StartsWith("writekey");
 
-                if (isWriteKey) WriteKeyCalls.Add(tables);
-                else DataCalls.Add(tables);
+                if (isWriteKey)
+                {
+                    WriteKeyCalls.Add(tables);
+                }
+                else
+                {
+                    DataCalls.Add(tables);
+                }
 
                 var source = isWriteKey ? WriteKeys : DataPayloads;
                 var response = new DataToolResponseData();
                 foreach (string t in tables)
                 {
-                    if (source.TryGetValue(t, out string v)) response.Data[t] = v;
+                    if (source.TryGetValue(t, out string v))
+                    {
+                        response.Data[t] = v;
+                    }
                 }
 
                 return UniTask.FromResult((T)(object)response);
@@ -164,7 +179,10 @@ namespace DataToolKit.EditorTests
                 var result = new List<string>();
                 if (!string.IsNullOrEmpty(list))
                 {
-                    foreach (string s in list.Split(',')) result.Add(s);
+                    foreach (string s in list.Split(','))
+                    {
+                        result.Add(s);
+                    }
                 }
                 return result;
             }
@@ -276,7 +294,10 @@ namespace DataToolKit.EditorTests
 
             private void Record(string name, bool ok, string detail)
             {
-                if (!ok) AllPassed = false;
+                if (!ok)
+                {
+                    AllPassed = false;
+                }
                 _sb.AppendLine($"  [{(ok ? "PASS" : "FAIL")}] {name} — {detail}");
             }
 

@@ -83,7 +83,10 @@ namespace DataToolKit
                 string tableKey = tables[i];
 
                 IDataToolLoader loader = GetLoader(tableKey);
-                if (loader == null) continue;
+                if (loader == null)
+                {
+                    continue;
+                }
 
                 string serverWriteKey = GetValue(serverWriteKeys, tableKey);
 
@@ -110,7 +113,10 @@ namespace DataToolKit
                 string tableKey = tables[i];
 
                 IDataToolLoader loader = GetLoader(tableKey);
-                if (loader == null) continue;
+                if (loader == null)
+                {
+                    continue;
+                }
 
                 string serverWriteKey = GetValue(serverWriteKeys, tableKey);
 
@@ -153,12 +159,18 @@ namespace DataToolKit
             List<string> requested = new List<string>();
             for (int i = 0; i < tables.Count; i++)
             {
-                if (ignoreTables != null && ignoreTables.Contains(tables[i])) continue;
+                if (ignoreTables != null && ignoreTables.Contains(tables[i]))
+                {
+                    continue;
+                }
                 requested.Add(tables[i]);
             }
 
             string tableRequest = string.Join(",", requested);
-            if (string.IsNullOrEmpty(tableRequest)) return new DataToolResponseData();
+            if (string.IsNullOrEmpty(tableRequest))
+            {
+                return new DataToolResponseData();
+            }
 
             string url = _config.BuildDataUrl(tableRequest);
             return await _network.GetAsync<DataToolResponseData>(url, _config.BuildHeaders());
@@ -170,7 +182,10 @@ namespace DataToolKit
             all.AddRange(_heavyTables);
 
             string tableRequest = string.Join(",", all);
-            if (string.IsNullOrEmpty(tableRequest)) return new DataToolResponseData();
+            if (string.IsNullOrEmpty(tableRequest))
+            {
+                return new DataToolResponseData();
+            }
 
             string url = _config.BuildWriteKeyUrl(tableRequest);
             return await _network.GetAsync<DataToolResponseData>(url, _config.BuildHeaders());
@@ -195,7 +210,10 @@ namespace DataToolKit
         private HashSet<string> CompareWriteKey(DataToolResponseData serverWriteKeys)
         {
             HashSet<string> same = new HashSet<string>();
-            if (serverWriteKeys?.Data == null) return same;
+            if (serverWriteKeys?.Data == null)
+            {
+                return same;
+            }
 
             Dictionary<string, string> local = LocalWriteKeys();
 
@@ -212,7 +230,10 @@ namespace DataToolKit
 
         private static string GetValue(DataToolResponseData data, string key)
         {
-            if (data?.Data != null && data.Data.TryGetValue(key, out string v)) return v;
+            if (data?.Data != null && data.Data.TryGetValue(key, out string v))
+            {
+                return v;
+            }
             return string.Empty;
         }
     }
