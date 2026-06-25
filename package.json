@@ -1,0 +1,27 @@
+{
+  "name": "com.mycore.datatoolkit",
+  "version": "0.1.0",
+  "displayName": "DataToolKit",
+  "description": "A reusable static-data loader for Unity: fetch versioned config tables from a DataTool-style remote API, with write-key change-detection, disk caching, fallback, and parallel/heavy load modes. Plain-class orchestrator (no singleton), wired through 3 small adapters. Zero game-specific dependencies.",
+  "unity": "2021.3",
+  "documentationUrl": "https://github.com/thinhtranbmt/datatoolkit-unity#readme",
+  "changelogUrl": "https://github.com/thinhtranbmt/datatoolkit-unity/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/thinhtranbmt/datatoolkit-unity/blob/main/LICENSE.md",
+  "keywords": [
+    "data",
+    "config",
+    "remote-config",
+    "loader",
+    "unitask"
+  ],
+  "author": {
+    "name": "MyCore"
+  },
+  "samples": [
+    {
+      "displayName": "DataTool Adapters (template)",
+      "description": "App-side wiring: config/network(flatten)/write-key-store adapters + bootstrap (guarded by DATATOOLKIT_SAMPLES).",
+      "path": "Samples~/DataTool"
+    }
+  ]
+}
